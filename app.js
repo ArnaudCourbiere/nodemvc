@@ -2,7 +2,7 @@ var express     = require('express');
 var mongoose    = require('mongoose');
 var util        = require('util');
 var fs          = require('fs');
-var app         = express.createServer();
+var app         = module.exports = express.createServer();
 
 try {
     require('./cfg/env')(app, express);
@@ -22,8 +22,10 @@ try {
         });
     });
     
-    app.listen(3000);
-    console.log('Express server started on port %s', app.address().port);
+    if (!module.parent) {
+        app.listen(3000);
+        console.log('Express server started on port %s', app.address().port);
+    }
 } catch (error) {
     util.log(error);
 }
