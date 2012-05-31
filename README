@@ -1,2 +1,2 @@
-<img src="https://secure.travis-ci.org/ArnaudCourbiere/node-mvc.png"/>
+"!https://secure.travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png!":http://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME]
 Node MVC app and a REST server using the express framework.
