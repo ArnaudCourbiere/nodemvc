@@ -1,2 +1,2 @@
-"!https://secure.travis-ci.org/ArnaudCourbiere/node-mvc.png!":http://travis-ci.org/ArnaudCourbiere/node-mvc
+{<img src="https://secure.travis-ci.org/ArnaudCourbiere/node-mvc.png" />}[http://travis-ci.org/ArnaudCourbiere/node-mvc]}
 Node MVC app and a REST server using the express framework.
