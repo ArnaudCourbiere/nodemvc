@@ -1,0 +1,17 @@
+{
+    "name": "node-mvc",
+    "description": "node mvc app and rest server using express framework",
+    "version": "0.0.1",
+    "author": "A Courbiere <arnaud.courbiere@gmail.com>",
+    "dependencies": {
+        "express": "*",
+        "mongoose": "*",
+        "mongoose-types": "*",
+        "underscore": "*",
+        "jasmine-node": "*"
+    },
+    "repository": "git://github.com/ArnaudCourbiere/node-mvc",
+    "scripts": {
+        "test": "jasmine-node test"
+    }
+}
