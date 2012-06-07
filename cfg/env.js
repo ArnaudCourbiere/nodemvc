@@ -22,9 +22,10 @@ try {
         
         // For every environment.
         app.configure(function () {
-            app.use(express.logger());
             app.set('view engine', 'ejs');
-            //app.use(express.static(__dirname + '/../public'));
+            app.use(express.logger());
+            app.use(express.favicon(config.dir.images + 'favicon.ico'));
+            app.use(express.static(config.dir.public));
         });
         
         app.configure('dev', function () {

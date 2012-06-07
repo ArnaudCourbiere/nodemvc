@@ -45,12 +45,17 @@ module.exports = function (app, express) {
         
     });
 
-    app.get('/*', function(req, res) {
+    app.get('/*', function (req, res, next) {
+        // TODO: Validate controller path.
         var request         = req.params[0];
         var segments        = request.split('/');
         var controllerName  = segments.length > 0 ? segments[0] : 'index';
         var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
-        var controller      = require('../controllers/' + controllerName);
+        try {
+            var controller      = require('../controllers/' + controllerName);
+        } catch (e) {
+            next();
+        }
 
         controller[functionName](req, res);
     });
