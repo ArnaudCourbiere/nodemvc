@@ -10,10 +10,6 @@ describe('test', function () {
         runs(function () {
             app.listen(3000, function () {
                 http.get({host: '127.0.0.1', port: 3000, path: '/' }, function (res) {
-                    res.on('data', function (data) {
-                        expect(data.toString()).toEqual('Hello World!');
-                    });
-
                     successSpy();
                     flag = true;
                 }).on('error', function (e) {
