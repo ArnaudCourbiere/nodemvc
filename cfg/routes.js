@@ -2,6 +2,9 @@
  * TODO
  */
 
+var fs  = require('fs');
+var _   = require('underscore');
+
 /**
  * Creates application routes and bootstraps the application controlers.
  * 
@@ -22,6 +25,7 @@ module.exports = function (app, express) {
         var id          = req.params.id;
         var body        = req.body;
         
+        // TODO: Implement.
         switch (req.method.toLowerCase()) {
             case 'get':
                 rest.get(resource, id);
@@ -46,17 +50,28 @@ module.exports = function (app, express) {
     });
 
     app.get('/*', function (req, res, next) {
-        // TODO: Validate controller path.
-        var request         = req.params[0];
-        var segments        = request.split('/');
-        var controllerName  = segments.length > 0 ? segments[0] : 'index';
-        var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
-        try {
-            var controller      = require('../controllers/' + controllerName);
-        } catch (e) {
-            next();
+        var request     = req.params[0];
+        var segments    = request.split('/');
+
+        if (segments.length == 1) {
+            controllerName = segments[0] == '' ? 'index' : segments[0];
         }
 
-        controller[functionName](req, res);
+        var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
+        var controllerPath  = __dirname + '/../controllers/' + controllerName + '.js';
+
+        fs.stat(controllerPath, function (err, stats) {
+            if (stats && stats.isFile()) {
+                // TODO: Load all controllers at once?
+                var controller = require('../controllers/' + controllerName);
+
+                if (_.isFunction(controller[functionName])) {
+                    controller[functionName](req, res);
+                    return;
+                }
+            }
+
+            next();
+        });
     });
 };
