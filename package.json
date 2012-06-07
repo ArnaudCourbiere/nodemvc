@@ -8,7 +8,8 @@
         "mongoose": "*",
         "mongoose-types": "*",
         "underscore": "*",
-        "jasmine-node": "*"
+        "jasmine-node": "*",
+        "ejs": "*"
     },
     "repository": "git://github.com/ArnaudCourbiere/node-mvc",
     "scripts": {

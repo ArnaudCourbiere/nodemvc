@@ -23,7 +23,8 @@ try {
         // For every environment.
         app.configure(function () {
             app.use(express.logger());
-            app.use(express.static(__dirname + '/../public'));
+            app.set('view engine', 'ejs');
+            //app.use(express.static(__dirname + '/../public'));
         });
         
         app.configure('dev', function () {

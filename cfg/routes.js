@@ -12,9 +12,6 @@
 * @return void
  */
 module.exports = function (app, express) {
-    app.get('/', function(req, res) {
-        res.send('Hello World!');
-    });
     
     // Handling REST requests.
     app.all('/rest/:resource/:id([0-9a-z]+)?', function (req, res) {
@@ -46,5 +43,15 @@ module.exports = function (app, express) {
                 throw new Error('Invalid method `' + req.method.toLowerCase() + '`');
         }
         
+    });
+
+    app.get('/*', function(req, res) {
+        var request         = req.params[0];
+        var segments        = request.split('/');
+        var controllerName  = segments.length > 0 ? segments[0] : 'index';
+        var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
+        var controller      = require('../controllers/' + controllerName);
+
+        controller[functionName](req, res);
     });
 };
