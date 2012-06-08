@@ -63,6 +63,7 @@ module.exports = function (app, express) {
         fs.stat(controllerPath, function (err, stats) {
             if (stats && stats.isFile()) {
                 // TODO: Load all controllers at once?
+                // TODO: Handle init method!!!
                 var controller = require('../controllers/' + controllerName);
 
                 if (_.isFunction(controller[functionName])) {
