@@ -1,0 +1,48 @@
+body {
+    background: #111111;
+    color: #fff;
+    margin: 0;
+    font-family: "Courier New";
+}
+
+#header {
+    padding: 20px 50px 20px 50px;;
+    border-bottom: 3px solid #000;
+    height: 80px;
+    background: #771111;
+}
+
+#header .title {
+    margin: 20px 0 0 0;
+    text-shadow: rgba(0, 0, 0, 0.8) 0 2px 0;
+    font-size: 2.5em;
+}
+
+#header .title span {
+    font-size: 0.4em;
+}
+
+#banner {
+    height: 250px;
+    border-bottom: 1px solid #000;
+    background: #121212 url("/images/logo.png") no-repeat right top;
+    text-align: center;
+}
+
+#banner span.quote {
+    display: inline-block;
+    margin-top: 120px;
+    font-style: italic;
+}
+
+#banner span.author {
+    font-size: 0.8em;
+    display: inline-block;
+    margin-top: 15px;
+    text-indent: 250px;
+}
+
+#main-container {
+    padding: 20px 50px 20px 50px;;
+    border-top: 1px solid #222;
+}
