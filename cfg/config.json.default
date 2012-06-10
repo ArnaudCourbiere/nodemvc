@@ -1,7 +1,0 @@
-{
-    "env": "dev",
-    "dir": {
-        "public": "/Users/arnaud/Development/hobby/node/node-mvc/public/",
-        "images": "/Users/arnaud/Development/hobby/node/node-mvc/public/images/"
-    }
-}

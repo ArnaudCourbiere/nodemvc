@@ -2,8 +2,9 @@
  * TODO
  */
 
-var fs  = require('fs');
-var _   = require('underscore');
+var fs      = require('fs');
+var _       = require('underscore');
+var config  = require('./config');
 
 /**
  * Creates application routes and bootstraps the application controlers.
@@ -49,30 +50,66 @@ module.exports = function (app, express) {
         
     });
 
+    // Match route with controller.
     app.get('/*', function (req, res, next) {
-        var request     = req.params[0];
-        var segments    = request.split('/');
+            var request     = req.params[0];
+            var segments    = request.split('/');
 
-        if (segments.length == 1) {
-            controllerName = segments[0] == '' ? 'index' : segments[0];
+            var controllerName  = segments[0] == '' ? 'index' : segments[0];
+            var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
+            var controllerPath  = __dirname + '/../controllers/' + controllerName + '.js';
+
+            fs.stat(controllerPath, function (err, stats) {
+                if (stats && stats.isFile()) {
+                    var controller = require('../controllers/' + controllerName);
+
+                    if (_.isFunction(controller[functionName])) {
+                        try {
+                            if (_.isFunction(controller.init)) {
+                                var result = controller.init(req, res);
+
+                                if (result == false) {
+                                    app.notFound(req, res);
+                                }
+                            }
+
+                            controller[functionName](req, res);
+                            return;
+                        } catch (err) {
+                            next(err);
+                            return;
+                        }
+                    }
+                }
+
+                next();
+            });
+    });
+
+    app.use(express.favicon(config.dir.images + 'favicon.ico'));
+    app.use(express.static(config.dir.public));
+
+    // If error message has not found, assume 404.
+    app.use(function (err, req, res, next) {
+        if (~err.message.indexOf('not found')) {
+            return next();
         }
 
-        var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
-        var controllerPath  = __dirname + '/../controllers/' + controllerName + '.js';
-
-        fs.stat(controllerPath, function (err, stats) {
-            if (stats && stats.isFile()) {
-                // TODO: Load all controllers at once?
-                // TODO: Handle init method!!!
-                var controller = require('../controllers/' + controllerName);
-
-                if (_.isFunction(controller[functionName])) {
-                    controller[functionName](req, res);
-                    return;
-                }
-            }
-
-            next();
-        });
+        app.error(req, res);
     });
+
+    // Assume 404 since no middleware responded.
+    app.use(function (req, res, next) {
+        app.notFound(req, res);
+    });
+
+    // App methods.
+    app.error = function (req, res) {
+        res.status(500).render('500');
+    };
+
+    app.notFound = function (req, res) {
+        res.status(404).render('404', { url: req.originalUrl });
+    }
+
 };

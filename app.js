@@ -2,21 +2,29 @@ var express     = require('express');
 var mongoose    = require('mongoose');
 var util        = require('util');
 var fs          = require('fs');
+var _           = require('underscore');
+var config      = require('./cfg/config');
 var app         = module.exports = express.createServer();
 
 try {
+
+    // Load environment configs.
     require('./cfg/env')(app, express);
+
+    // Load routes and controllers.
     require('./cfg/routes')(app, express);
+
+    // Load utilities.
     require('./lib/util');
     
+    // Load models.
     mongoose.connect('mongodb://localhost:27017/app');
     
-    // Load every models.
-    fs.readdir('./models', function (err, files) {
+    fs.readdir(config.dir.models, function (err, files) {
         files.forEach(function (file) {
-            fs.stat('./models/' + file, function (err, stats) {
+            fs.stat(config.dir.models + file, function (err, stats) {
                 if (stats.isFile()) {
-                    require('./models/' + file);
+                    require(config.dir.models + file);
                 }
             });
         });
@@ -24,14 +32,14 @@ try {
 
     // TODO add static helper and pass config.
 
-    // Add dynamicHelpers
+    // Setup dynamicHelpers
     app.dynamicHelpers({
         session: function (req, res) {
             return req.session;
         },
         menu: function (req, res) {
             
-            // TODO: query db.
+            // TODO: query from db.
             var menu = {
                 home: {
                     label: "Home",
@@ -59,13 +67,14 @@ try {
                 navPage = 'home';
             }
 
-            menu[navPage].class += ' active';
+            if (menu[navPage]) {
+                menu[navPage].class += ' active';
+            }
 
             return menu;
         }
     });
 
-    
     if (!module.parent) {
         app.listen(3000);
         console.log('Express server started on port %s', app.address().port);

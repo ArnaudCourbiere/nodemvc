@@ -128,3 +128,14 @@ body {
     line-height: 1.5em;
 }
 
+.center {
+    text-align: center;
+}
+
+.notfound, .servererror {
+    margin-top: 150px;
+}
+
+.notfound h1, .servererror h1 {
+    font-size: 4em;
+}
