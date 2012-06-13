@@ -15,7 +15,7 @@ var Post = new Schema({
     content         : { type: String, required: true },
     dateCreated     : { type: Date, required: true },
     dateModified    : { type: Date, required: false },
-    comments        : [Comment]
+    comments        : [Comment],
     tags            : {
         label: { type: String, require: true }
     }
