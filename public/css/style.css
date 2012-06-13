@@ -32,7 +32,7 @@ body {
     background: #181818;
     color: #fff;
     margin: 0;
-    font-family: "Courier New";
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
 }
 
 /*
@@ -50,9 +50,11 @@ body {
 }
 
 #header .title {
-    margin: 40px 0 0 0;
+    margin: 30px 0 0 0;
     text-shadow: rgba(0, 0, 0, 0.8) 0 2px 0;
-    font-size: 2.5em;
+    font-size: 3em;
+    font-weight: 100;
+    font-family: Georgia, Serif;
 }
 
 #header .title span {
