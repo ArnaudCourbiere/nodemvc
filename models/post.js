@@ -1,6 +1,7 @@
 var mongoose        = require('mongoose');
 var mongooseTypes   = require('mongoose-types');
 var Schema          = mongoose.Schema;
+var ObjectId        = Schema.ObjectId;
 
 var Comment = new Schema({
     title   : { type: String, required: true },
