@@ -52,11 +52,9 @@ module.exports = function (app, express) {
 
     // Match route with controller.
     app.get('/*', function (req, res, next) {
-            var request     = req.params[0];
-            var segments    = request.split('/');
-
+            var segments        = req.params[0].split('/');
             var controllerName  = segments[0] == '' ? 'index' : segments[0];
-            var functionName    = segments.length > 1 ? segments[1] + 'Action' : 'indexAction';
+            var functionName    = (segments.length > 1 && segments[1] != '') ? segments[1] + 'Action' : 'indexAction';
             var controllerPath  = __dirname + '/../controllers/' + controllerName + '.js';
 
             fs.stat(controllerPath, function (err, stats) {

@@ -61,7 +61,7 @@ try {
                 }
             }
 
-            var navPage = req.params.slice(0);
+            var navPage = req.params[0].split('/')[0];
             
             if (navPage == '') {
                 navPage = 'home';
