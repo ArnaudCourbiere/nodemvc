@@ -29,8 +29,8 @@ body {
     /*
     background: #111111;
     */
-    background: #181818;
-    color: #fff;
+    background: #1b1b1b;
+    color: #ddb;
     margin: 0;
     font-family: 'Trebuchet MS', Helvetica, sans-serif;
 }
@@ -55,6 +55,7 @@ body {
     font-size: 3em;
     font-weight: 100;
     font-family: Georgia, Serif;
+    color: #fff;
 }
 
 #header .title span {
@@ -130,13 +131,15 @@ body {
 #main-container {
     font-size: 0.8em;
     padding: 20px 50px 20px 50px;;
-    border-top: 1px solid #252525;
+    border-top: 1px solid #272727;
 }
 
 .link-list {
     margin-top: 50px;
     padding-left: 70px;
     line-height: 1.5em;
+    list-style-type: disc;
+    color: #88ff88;
 }
 
 .center {
