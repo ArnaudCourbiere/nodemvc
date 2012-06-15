@@ -21,7 +21,7 @@ module.exports = function (app, express) {
     app.all('/rest/:resource/:id([0-9a-z]+)?', function (req, res) {
         app.use(express.bodyParser());
         
-        var rest        = require('../controllers/rest')(req, res);
+        var rest        = require(config.dir.app + 'controllers/rest')(req, res);
         var resource    = req.params.resource;
         var id          = req.params.id;
         var body        = req.body;
@@ -55,11 +55,11 @@ module.exports = function (app, express) {
             var segments        = req.params[0].split('/');
             var controllerName  = segments[0] == '' ? 'index' : segments[0];
             var functionName    = (segments.length > 1 && segments[1] != '') ? segments[1] + 'Action' : 'indexAction';
-            var controllerPath  = __dirname + '/../controllers/' + controllerName + '.js';
+            var controllerPath  = config.dir.app + 'controllers/' + controllerName + '.js';
 
             fs.stat(controllerPath, function (err, stats) {
                 if (stats && stats.isFile()) {
-                    var controller = require('../controllers/' + controllerName);
+                    var controller = require(config.dir.app + 'controllers/' + controllerName);
 
                     if (_.isFunction(controller[functionName])) {
                         try {

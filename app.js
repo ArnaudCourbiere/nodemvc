@@ -20,11 +20,11 @@ try {
     // Load models.
     mongoose.connect('mongodb://localhost:27017/app');
     
-    fs.readdir(config.dir.models, function (err, files) {
+    fs.readdir(config.dir.app + 'models/', function (err, files) {
         files.forEach(function (file) {
-            fs.stat(config.dir.models + file, function (err, stats) {
+            fs.stat(config.dir.app + 'models/' + file, function (err, stats) {
                 if (stats.isFile()) {
-                    require(config.dir.models + file);
+                    require(config.dir.app + 'models/' + file);
                 }
             });
         });

@@ -21,7 +21,8 @@ module.exports = function (app, express) {
     
     // For every environment.
     app.configure(function () {
-        app.set('view engine', 'ejs');
+        app.set('views', config.dir.app + 'views');
+        app.set('view engine', config.view.engine);
         app.use(express.logger());
     });
     
