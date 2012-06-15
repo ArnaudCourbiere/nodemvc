@@ -1,15 +1,12 @@
 {
-    "name": "node-mvc",
-    "description": "node mvc app and rest server using express framework",
+    "name": "nodemvc",
+    "description": "node mvc framework built on top of express.",
     "version": "0.0.1",
-    "author": "A Courbiere <arnaud.courbiere@gmail.com>",
+    "author": "arnaud <arnaud.courbiere@gmail.com>",
     "dependencies": {
         "express": "*",
         "mongoose": "*",
-        "mongoose-types": "*",
-        "underscore": "*",
-        "jasmine-node": "*",
-        "ejs": "*"
+        "underscore": "*"
     },
     "repository": "git://github.com/ArnaudCourbiere/node-mvc",
     "scripts": {
