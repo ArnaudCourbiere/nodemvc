@@ -1,14 +1,25 @@
 /**
  * TODO
  */
+var _ = require('underscore');
+exports = module.exports;
 
 config = {
     env: 'dev',
     dir: {
-        public: '/home/arnaud/Development/hobby/node-mvc/public/',
-        images: '/home/arnaud/Development/hobby/node-mvc/public/images/',
-        models: '/home/arnaud/Development/hobby/node-mvc/models/'
+        public: __dirname  + '/../../../public/',
+        images: __dirname  + '/../../../public/images/',
+        models: __dirname  + '/../../../models/',
+        views: __dirname  + '/../../../views/',
+        controllers: __dirname  + '/../../../controllers/'
+    },
+    view: {
+        engine: 'ejs'
     }
 }
 
-module.exports = config;
+exports.config = config;
+
+exports.configure = function (name, value) {
+    
+}

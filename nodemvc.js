@@ -1,12 +1,14 @@
 var express     = require('express');
 var mongoose    = require('mongoose');
+var connect     = require('connect');
 var util        = require('util');
 var fs          = require('fs');
 var _           = require('underscore');
-var config      = require('./cfg/config');
-var app         = module.exports = express.createServer();
+exports         = module.exports;
+var config;
 
-try {
+exports.boot = function (configPath) {
+    var app = express.createServer();
 
     // Load environment configs.
     require('./cfg/env')(app, express);
@@ -16,15 +18,18 @@ try {
 
     // Load utilities.
     require('./lib/util');
-    
+
     // Load models.
     mongoose.connect('mongodb://localhost:27017/app');
-    
-    fs.readdir(config.dir.app + 'models/', function (err, files) {
+
+    fs.readdir(config.dir.models, function (err, files) {
+        console.log(err);
+        console.log(files);
+        process.exit();
         files.forEach(function (file) {
-            fs.stat(config.dir.app + 'models/' + file, function (err, stats) {
+            fs.stat(config.dir.models + file, function (err, stats) {
                 if (stats.isFile()) {
-                    require(config.dir.app + 'models/' + file);
+                    require(config.dir.models + file);
                 }
             });
         });
@@ -75,10 +80,9 @@ try {
         }
     });
 
-    if (!module.parent) {
-        app.listen(3000);
-        console.log('Express server started on port %s', app.address().port);
-    }
-} catch (error) {
-    util.log(error);
+    return app;
+};
+
+for (var key in connect.middleware) {
+      Object.defineProperty(exports, key, Object.getOwnPropertyDescriptor(connect.middleware, key));
 }
