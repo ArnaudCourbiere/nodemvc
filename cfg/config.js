@@ -4,22 +4,13 @@
 var _ = require('underscore');
 exports = module.exports;
 
-config = {
+exports.config = {
     env: 'dev',
-    dir: {
-        public: __dirname  + '/../../../public/',
-        images: __dirname  + '/../../../public/images/',
-        models: __dirname  + '/../../../models/',
-        views: __dirname  + '/../../../views/',
-        controllers: __dirname  + '/../../../controllers/'
-    },
-    view: {
+    views: {
         engine: 'ejs'
     }
-}
+};
 
-exports.config = config;
-
-exports.configure = function (name, value) {
-    
-}
+exports.setConfig = function (cfg) {
+    _.extend(exports.config, cfg);
+};

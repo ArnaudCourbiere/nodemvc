@@ -4,7 +4,7 @@
 
 var fs      = require('fs');
 var _       = require('underscore');
-var config  = require('./config.default');
+var config  = require('./config').config;
 
 /**
  * Creates application routes and bootstraps the application controlers.
@@ -21,7 +21,7 @@ module.exports = function (app, express) {
     app.all('/rest/:resource/:id([0-9a-z]+)?', function (req, res) {
         app.use(express.bodyParser());
         
-        var rest        = require(config.dir.controllers + 'rest')(req, res);
+        var rest        = require(config.paths.controllers + 'rest')(req, res);
         var resource    = req.params.resource;
         var id          = req.params.id;
         var body        = req.body;
@@ -55,11 +55,11 @@ module.exports = function (app, express) {
             var segments        = req.params[0].split('/');
             var controllerName  = segments[0] == '' ? 'index' : segments[0];
             var functionName    = (segments.length > 1 && segments[1] != '') ? segments[1] + 'Action' : 'indexAction';
-            var controllerPath  = config.dir.controllers + controllerName + '.js';
+            var controllerPath  = config.paths.controllers + controllerName + '.js';
 
             fs.stat(controllerPath, function (err, stats) {
                 if (stats && stats.isFile()) {
-                    var controller = require(config.dir.controllers + controllerName);
+                    var controller = require(config.paths.controllers + controllerName);
 
                     if (_.isFunction(controller[functionName])) {
                         try {
@@ -84,8 +84,8 @@ module.exports = function (app, express) {
             });
     });
 
-    app.use(express.favicon(config.dir.images + 'favicon.ico'));
-    app.use(express.static(config.dir.public));
+    app.use(express.favicon(config.paths.images + 'favicon.ico'));
+    app.use(express.static(config.paths.public));
 
     // If error message has not found, assume 404.
     app.use(function (err, req, res, next) {

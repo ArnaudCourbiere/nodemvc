@@ -4,7 +4,7 @@
 
 var fs      = require('fs');
 var util    = require('util');
-var config  = require('./config.default');
+var config  = require('./config').config;
 
 process.env.NODE_ENV    = (config.env) ? config.env: 'prod';
 
@@ -21,8 +21,8 @@ module.exports = function (app, express) {
     
     // For every environment.
     app.configure(function () {
-        app.set('views', config.dir.views);
-        app.set('view engine', config.view.engine);
+        app.set('views', config.paths.views);
+        app.set('view engine', config.views.engine);
         app.use(express.logger());
     });
     
