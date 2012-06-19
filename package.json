@@ -1,16 +1,17 @@
 {
     "name": "nodemvc",
     "description": "node mvc framework built on top of express.",
-    "version": "0.0.1dev",
+    "version": "0.0.2dev",
     "author": "Arnaud Courbiere <arnaud.courbiere@gmail.com>",
     "main": "nodemvc",
     "dependencies": {
         "express": "*",
-        "mongoose": "*",
-        "underscore": "*",
         "connect": "*"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "mongoose": "*",
+        "ejs": "*"
+    },
     "repository": "git://github.com/ArnaudCourbiere/nodemvc",
     "scripts": {
         "prepublish": "npm prune",

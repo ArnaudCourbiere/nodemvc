@@ -2,7 +2,6 @@ var express     = require('express');
 var connect     = require('connect');
 var util        = require('util');
 var fs          = require('fs');
-var _           = require('underscore');
 var config      = require('./cfg/config');
 exports         = module.exports;
 

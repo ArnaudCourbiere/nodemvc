@@ -1,16 +1,17 @@
 /**
  * TODO
  */
-var _ = require('underscore');
 exports = module.exports;
 
 exports.config = {
     env: 'dev',
     views: {
-        engine: 'ejs'
+        engine: undefined
     }
 };
 
 exports.setConfig = function (cfg) {
-    _.extend(exports.config, cfg);
+    for (var prop in cfg) {
+        exports.config[prop] = cfg[prop];
+    }
 };

@@ -3,7 +3,6 @@
  */
 
 var fs      = require('fs');
-var _       = require('underscore');
 var config  = require('./config').config;
 
 /**
@@ -61,9 +60,13 @@ module.exports = function (app, express) {
                 if (stats && stats.isFile()) {
                     var controller = require(config.paths.controllers + controllerName);
 
-                    if (_.isFunction(controller[functionName])) {
+                    if (typeof controller == 'function') {
+                        controller = controller();
+                    }
+
+                    if (typeof controller[functionName] == 'function') {
                         try {
-                            if (_.isFunction(controller.init)) {
+                            if (typeof controller.init == 'function') {
                                 var result = controller.init(req, res);
 
                                 if (result == false) {
