@@ -23,9 +23,6 @@ exports.boot = function () {
         mongoose.connect('mongodb://localhost:27017/app');
 
         fs.readdir(config.dir.models, function (err, files) {
-            console.log(err);
-            console.log(files);
-            process.exit();
             files.forEach(function (file) {
                 fs.stat(config.dir.models + file, function (err, stats) {
                     if (stats.isFile()) {
