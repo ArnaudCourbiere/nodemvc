@@ -5,8 +5,8 @@
     "author": "Arnaud Courbiere <arnaud.courbiere@gmail.com>",
     "main": "nodemvc",
     "dependencies": {
-        "express": "*",
-        "connect": "*"
+        "connect": "*",
+        "express": "*"
     },
     "devDependencies": {
         "mongoose": "*",
