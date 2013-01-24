@@ -3,7 +3,7 @@
     "description": "node mvc framework built on top of express.",
     "version": "0.0.2dev",
     "author": "Arnaud Courbiere <arnaud.courbiere@gmail.com>",
-    "main": "nodemvc",
+    "main": "index",
     "dependencies": {
         "connect": "*",
         "express": "*"
